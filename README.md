@@ -1,6 +1,6 @@
-# Tibco to Java Migration Tool
+# SpringTibco AI: Multi-Agent Migration Framework
 
-This project provides a tool to assist in migrating Tibco BusinessWorks projects to Java Spring Boot applications. It leverages large language models (LLMs) to analyze Tibco projects and generate corresponding Java code.
+This tool, developed using the CrewAI framework, leverages multi-agent AI to assist in migrating Tibco BusinessWorks projects to Java Spring Boot applications. By utilizing advanced large language models (LLMs), the tool effectively analyzes Tibco projects, identifies key components, and generates corresponding Java code to seamlessly transition to Spring Boot architecture. The multi-agent AI system enhances the tool’s efficiency and scalability, allowing for the automatic generation of code that closely mirrors the structure and functionality of the original Tibco BusinessWorks applications, while adapting to the Java ecosystem.
 
 ## Prerequisites
 
