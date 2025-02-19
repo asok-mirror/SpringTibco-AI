@@ -1,44 +1,72 @@
 tibco_analyze_task:
   description: >
-    Analyze the provided tibco business events and business works project focussing on understanding the 
-    business logic, integration points, process, adapters, error handling, components, configuration, 
-    event processing and rule engine. Compile a detailted analysis outcome with these, specifically how 
-    they can be used and leveraged in a Tibco to Java 21 Spring boot 3.1.3 migration.
+    Analyze the provided TIBCO BusinessEvents and TIBCO BusinessWorks projects with a focus on the following components: 
+    business logic, integration points, processes and subprocesses, process definitions, adapters, error handling mechanisms, 
+    common logging practices, exception handling, database connection configurations, global variables, event processing, 
+    preprocessors, decision tables, and rule functions. Generate a detailed analysis outlining the structure, functionality, 
+    and purpose of each component, and provide specific insights on how these elements can be utilized and adapted during a 
+    migration to Java 21 with Spring Boot 3.4.2. Ensure the analysis includes considerations for maintaining functional parity 
+    and addressing potential challenges during the migration process.
   expected_output: >
-    A detailted analysis outcome capturing all the Tibco project's  business logic, integration points, 
-    process, adapters, error handling, components, configuration, event processing and rule engine such that
-    these outcomes are directly used for creating Java Springboot application that exactly mimics tibco project.
+    Produce a detailed analysis that documents all aspects of the Tibco project's architecture and functionality, 
+    including business logic, integration points, process definitions, processes and subprocesses, adapters, error handling mechanisms, 
+    common logging practices, exception handling, database connection configurations, global variables, event processing, preprocessors, 
+    decision tables, and rule functions. Structure this analysis to serve as a direct and comprehensive reference for 
+    developing a Java Spring Boot application that replicates the Tibco project's behavior with high fidelity. 
+    Ensure the documentation is clear, specific, and technically precise for seamless translation into Java Spring Boot implementation.
 
 create_spring_boot_task:
   description: >
-    Create a Java 21 based Spring boot 3.1.3 based application incorporating all the business flows of tibco project.
-    The created spring boot app should have end to end implmentation of all the business logics,
-    database configuration, unit tests compilation, file opeations, pub sub, queues, batch processing, etc.. as required.
-    Edit and refine the springboot app as needed to ensure for correctness to mimic given tibco project.
-    Use lombok annotations, sl4j for logging, have inline/todo comments.
-    Must ensure the spring boot app mimics exactly given tibco business works and business events project with complete implementation in java springboot.
+    Develop a Java 21 and Spring Boot 3.4.2 application replicating the complete business logic, functionality, and workflows of the provided TIBCO BusinessWorks 
+    and TIBCO BusinessEvents project. Implement an end-to-end solution that includes:
 
-    The bash script will have these components:
-    1. A command to create the directories where the source code will reside.
-    2. A pom.xml file for building the spring boot project, including the required spring boot dependencies.
-    3. A java class that contains all the spring boot logic, including rest controllers, entities and the logic for implementing the business rules with a tiered architecture and solid principles in mind. 
-    4. An application.properties file with the basic spring boot configuration.
-    5. A maven command to compile and execute the project.
- 
-    The project must implement similar logic as described in the provided TIBCO BusinessEvents project description.
- 
-    Make sure to follow these guidelines when generating the code:
-    - Use a clear and readable coding style, including log messages to follow the execution flow
-    - When creating the java classes, use lombok annotations when possible.
-    - Be sure to use correct bash syntax and multiline string handling using `cat << 'EOF' > file`
-    - The created java project must replicate the TIBCO Business Events logic and TIBCO Business Works
-    - The Created java project must follow the tiered architecture and adhere to solid principles. 
-    - The created java project must have complte implementation and ensure that it is the exact replacement of the given tibco project.
-    - Reiterate the requirements and ensure that the bash script created is accurate, that the Spring Boot application is compiled without any errors, and has unit tests.
-    - Do not include comments that are not related to the generation. Do not include usage examples.
+    ### Required Features:
+    - **Business Logic Replication**: Ensure identical implementation fidelity for existing business logic.
+    - **Database Configuration and Interaction**: Configure and integrate database interaction via Spring Data JPA.
+    - **Logging**: Utilize SLF4J for structured logging with clear and consistent log messages.
+    - **Exception Handling**: Implement robust exception handling mechanisms across all layers.
+    - **Rule Engine Integration**: Incorporate Drools for business rule processing and decision-making.
+    - **Unit Testing**: Provide extensive JUnit-based unit tests covering all critical components and functionality.
+    - **File Handling**: Implement file input/output operations as required by the business logic.
+    - **GCP Pub/Sub Integration**: Develop publishers and listeners for Google Cloud Pub/Sub messaging.
+    - **Batch Processing**: Integrate Spring Batch for batch processing capabilities where applicable.
+
+    ### Technical Requirements:
+    - Use Lombok annotations to reduce boilerplate code.
+    - Follow a tiered architecture adhering to SOLID principles.
+    - Develop clear and maintainable Java code with structured inline comments (`// TODO`) suggesting areas for future improvements or clarifications.
+    - Maintain strict compliance with the specifications and functionalities of the TIBCO BusinessWorks and BusinessEvents project.
+
+    ### Deliverables for Automation:
+    Provide a Bash script that automates project creation, ensuring correct setup and compilation with the following components included:
+
+    1. **Directory Structure**: Commands to create a structured directory layout for the Java application.
+    2. **Maven `pom.xml`**:
+      - Include dependencies for Spring Boot, Drools, GCP Pub/Sub, Lombok, Spring Batch, SLF4J, Spring Data JPA, and relevant libraries.
+    3. **Java Codebase**:
+      - REST controllers, service classes, JPA repositories, and DTO/entity classes.
+      - Business logic implemented following tiered architecture and SOLID principles.
+      - Unit tests created for core components to ensure code reliability.
+    4. **Configuration Files**:
+      - Provide a default `application.properties` file with configuration for Spring Boot.
+    5. **Commands**:
+      - Include Maven build commands to compile and execute the project seamlessly.
+
+    ### Bash Script Requirements:
+    - Use proper Bash syntax and handle multiline strings with `cat << 'EOF'`.
+    - Ensure zero compilation or runtime errors during project execution.
+    - Generate unit test placeholders or implementations for critical functionality.
+    - Include logging in the generated application to give developers visibility into execution flow.
+
+    ### Guidelines for Implementation:
+    - Ensure clean and precise coding practices throughout the application.
+    - Validate that the Bash script generates, compiles, and executes the Spring Boot application without issues.
+    - Confirm the generated project is comprehensive and adheres to the original TIBCO project’s workflows and business processes.
   expected_output: >
-    A Springboot app that has been migrated from given tibco project which mimics end to end functionalities.
-
+    Create a Spring Boot application that replicates the complete functionalities of the provided TIBCO BusinessWorks 
+    and TIBCO BusinessEvents projects. Ensure the migrated application preserves equivalent workflows, business 
+    logic, and event processing capabilities. Adhere to Spring Boot development best practices, 
+    including clean code, modular architecture, and proper dependency management. 
 review_and_edit_spring_boot_task:
   description: >
     Review the created spring boot app and check for compilation errors, end to end implmentation of all business logics,

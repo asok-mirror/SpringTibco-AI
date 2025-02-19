@@ -3,3 +3,5 @@ jobposting-api
 db
 __pycache__
 poetry.lock
+outputs/*
+src/tibco_to_java/outputs/*

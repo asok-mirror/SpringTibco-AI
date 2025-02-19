@@ -1,38 +1,71 @@
-# AI Crew for Job Posting
-## Introduction
-This project demonstrates the use of the CrewAI framework to automate the creation of job posting. CrewAI orchestrates autonomous AI agents, enabling them to collaborate and execute complex tasks efficiently.
+# Tibco to Java Migration Tool
 
-By [@joaomdmoura](https://x.com/joaomdmoura)
+This project provides a tool to assist in migrating Tibco BusinessWorks projects to Java Spring Boot applications. It leverages large language models (LLMs) to analyze Tibco projects and generate corresponding Java code.
 
-- [CrewAI Framework](#crewai-framework)
-- [Running the script](#running-the-script)
-- [Details & Explanation](#details--explanation)
-- [Contributing](#contributing)
-- [Support and Contact](#support-and-contact)
-- [License](#license)
+## Prerequisites
 
-## CrewAI Framework
-CrewAI is designed to facilitate the collaboration of role-playing AI agents. In this example, these agents work together to analyze company culture and identify role requirements to create comprehensive job postings and industry analysis.
+*   Python 3.12+
+*   Poetry (for dependency management)
+*   A Gemini API Key (configured in your environment variables)
+*   Optional: Windows Subsystem for Linux (WSL) (if running on Windows)
+*   Use Conda or Venv for managing Python environments
 
-## Running the Script
-It uses GPT-4o by default so you should have access to that to run it.
+## Installation
 
-***Disclaimer:** This will use gpt-4o unless you change it to use a different model, and by doing so it may incur in different costs.*
+1.  Clone the repository:
 
-- **Configure Environment**: Copy `.env.example` and set up the environment variables for [OpenAI](https://platform.openai.com/api-keys) and other tools as needed, like [Serper](serper.dev).
-- **Install Dependencies**: Run `poetry lock && poetry install`.
-- **Customize**: Modify `src/job_posting/main.py` to add custom inputs for your agents and tasks.
-- **Customize Further**: Check `src/job_posting/config/agents.yaml` to update your agents and `src/job_posting/config/tasks.yaml` to update your tasks.
-- **Execute the Script**: Run `poetry run job_posting` and input your project details.
+    ```bash
+    git clone <repository_url>
+    cd tibco-to-java
+    ```
 
-## Details & Explanation
-- **Running the Script**: Execute `poetry run job_posting`. The script will leverage the CrewAI framework to generate a detailed job posting.
-- **Key Components**:
-  - `src/job_posting/main.py`: Main script file.
-  - `src/job_posting/crew.py`: Main crew file where agents and tasks come together, and the main logic is executed.
-  - `src/job_posting/config/agents.yaml`: Configuration file for defining agents.
-  - `src/job_posting/config/tasks.yaml`: Configuration file for defining tasks.
-  - `src/job_posting/tools`: Contains tool classes used by the agents.
+2.  Install dependencies using Poetry:
 
-## License
-This project is released under the MIT License.
+    ```bash
+    poetry install
+    ```
+
+## Configuration
+
+1.  **API Keys:** Set the following environment variables:
+
+    *   `GEMINI_API_KEY`: Your Gemini API key.
+
+    ```bash
+    export GEMINI_API_KEY="YOUR_GEMINI_API_KEY"
+    ```
+
+    or
+
+    * **Configure Environment**: Use `.env.example` to create `.env` file and set up the environment variables for [Gemini](https://aistudio.google.com/apikey)
+
+2.  **WSL (Windows only):** Ensure that WSL is installed and configured correctly.
+
+## Usage
+
+1.  **Run the migration tool:**
+
+    ```bash
+    poetry run tibco_to_java
+    ```
+
+    This will:
+
+    *   Analyze the Tibco project (defined in [tibco_credit_maintanence_project.txt](http://_vscodecontentref_/0)).
+    *   Generate a Java Spring Boot project in the `outputs/springBootProject` directory.
+    *   Create a `bash_script.sh` file in the `outputs/springBootProject` directory containing the commands to set up the project.
+    *   Navigate to above folder and manually execute the `bash_script.sh` file using WSL (on Windows) or bash (on Linux/macOS).
+
+2.  **Run the generated Spring Boot application:**
+
+    Navigate to the `outputs/springBootProject` directory and execute the following commands:
+
+    ```bash
+    cd outputs/springBootProject
+    ./bash_script.sh
+    ```
+
+    This will create the Spring Boot project.
+
+    ## License
+    This project is released under the MIT License.
