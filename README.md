@@ -51,7 +51,7 @@ This tool, developed using the CrewAI framework, leverages multi-agent AI to ass
 
     This will:
 
-    *   Analyze the Tibco project (defined in [tibco_credit_maintanence_project.txt](http://_vscodecontentref_/0)).
+    *   Analyze the Tibco project (defined in [tibco_credit_maintanence_project.txt](src\tibco_to_java\data\tibco_credit_maintanence_project.txt)).
     *   Generate a Java Spring Boot project in the `outputs/springBootProject` directory.
     *   Create a `bash_script.sh` file in the `outputs/springBootProject` directory containing the commands to set up the project.
     *   Navigate to above folder and manually execute the `bash_script.sh` file using WSL (on Windows) or bash (on Linux/macOS).
@@ -67,5 +67,5 @@ This tool, developed using the CrewAI framework, leverages multi-agent AI to ass
 
     This will create the Spring Boot project.
 
-    ## License
-    This project is released under the MIT License.
+## License
+This project is released under the MIT License. 
