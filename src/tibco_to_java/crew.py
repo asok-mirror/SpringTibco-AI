@@ -4,14 +4,10 @@ from crewai.project import CrewBase, agent, crew, task
 from pathlib import Path
 import json, re
 
-# Check our tools documentations for more information on how to use them
+# Check the tools documentations for more information on how to use them
 from crewai_tools import SerperDevTool, WebsiteSearchTool, FileReadTool
 from pydantic import BaseModel, Field, validator
 import os
-
-class JavaSpringBoot(BaseModel):
-    bash: str = Field(description="bash script to generate Java Spring Boot project")
-    # feedback: str = Field(description="feedback JSON with status and message")
 
 class JavaSpringBoot(BaseModel):
     bash: str = Field(description="bash script to generate Java Spring Boot project")
