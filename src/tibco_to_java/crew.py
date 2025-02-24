@@ -104,21 +104,21 @@ class TibcoToJavaCrew:
 
     def __init__(self) -> None:             
         try:
-            self.llm = LLM(    
-            # model="gemini/gemini-2.0-pro-exp-02-05",  
-            model="gemini/gemini-2.0-flash",     
-            api_key=os.environ.get("GEMINI_API_KEY"),
-            temperature=0.7,
-            # response_format=JavaSpringBoot        
-            )
-
-            # self.llm = LLM(
-            # model="openrouter/google/gemini-2.0-pro-exp-02-05:free",
-            # base_url="https://openrouter.ai/api/v1",
-            # api_key=os.environ.get("OPEN_ROUTE_SERVICE_API_KEY"),
+            # self.llm = LLM(    
+            # #model="gemini/gemini-2.0-pro-exp-02-05",  
+            # model="gemini/gemini-2.0-flash",     
+            # api_key=os.environ.get("GEMINI_API_KEY"),
             # temperature=0.7,
-            # response_format=JavaSpringBoot
+            # # response_format=JavaSpringBoot        
             # )
+
+            self.llm = LLM(
+            model="openrouter/google/gemini-2.0-pro-exp-02-05:free",
+            base_url="https://openrouter.ai/api/v1",
+            api_key=os.environ.get("OPEN_ROUTE_SERVICE_API_KEY"),
+            temperature=0.7,
+            #response_format=JavaSpringBoot
+            )
         except KeyError:
             raise EnvironmentError("GEMINI_API_KEY environment variable not set")
 
@@ -129,7 +129,7 @@ class TibcoToJavaCrew:
             tools=[file_read_tool],
             llm=self.llm,            
             verbose=True,
-            allow_delegation=True
+            allow_delegation=False
             
         )
     
@@ -138,8 +138,9 @@ class TibcoToJavaCrew:
         return Agent(
             config=self.agents_config['java_architect_agent'],
             llm=self.llm,
-            verbose=True,
-            allow_delegation=False
+            verbose=True,            
+            allow_delegation=False,
+            # allow_code_execution=True
         )
     
     # @agent
@@ -155,6 +156,7 @@ class TibcoToJavaCrew:
     def tibco_analyze_task(self) -> Task:
         return Task(
             config=self.tasks_config['tibco_analyze_task'],
+            tools=[file_read_tool],
             agent=self.tibco_analyze_agent()
         )
 
@@ -162,8 +164,8 @@ class TibcoToJavaCrew:
     def create_spring_boot_task(self) -> Task:
         return Task(
             config=self.tasks_config['create_spring_boot_task'],
-            agent=self.java_architect_agent(),
-            context=[self.tibco_analyze_task()],
+            agent=self.java_architect_agent(),            
+            context=[self.tibco_analyze_task()],            
             output_json=JavaSpringBoot
         )
 
@@ -183,5 +185,7 @@ class TibcoToJavaCrew:
             agents=self.agents,  # Automatically created by the @agent decorator
             tasks=self.tasks,  # Automatically created by the @task decorator
             process=Process.sequential,
-            verbose=True
+            verbose=True,
+            # planning=True
+            # memory=True 
         )
