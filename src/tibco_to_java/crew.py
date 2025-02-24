@@ -1,6 +1,7 @@
 from typing import List,  Dict, Any
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
+from crewai.memory.long_term.long_term_memory import LongTermMemory, LTMSQLiteStorage
 from pathlib import Path
 import json, re
 
@@ -102,23 +103,29 @@ class TibcoToJavaCrew:
     agents_config = 'config/agents.yaml'
     tasks_config = 'config/tasks.yaml'
 
+    DB_ROOT_PATH = "src\\tibco_to_java\\.db"
+
     def __init__(self) -> None:             
         try:
-            # self.llm = LLM(    
-            # #model="gemini/gemini-2.0-pro-exp-02-05",  
-            # model="gemini/gemini-2.0-flash",     
-            # api_key=os.environ.get("GEMINI_API_KEY"),
-            # temperature=0.7,
-            # # response_format=JavaSpringBoot        
-            # )
-
-            self.llm = LLM(
-            model="openrouter/google/gemini-2.0-pro-exp-02-05:free",
-            base_url="https://openrouter.ai/api/v1",
-            api_key=os.environ.get("OPEN_ROUTE_SERVICE_API_KEY"),
-            temperature=0.7,
-            #response_format=JavaSpringBoot
+            self.long_term_memory = LongTermMemory(
+                storage=LTMSQLiteStorage(db_path=f"{self.DB_ROOT_PATH}\\tibco_to_java.db"),
             )
+                
+            self.llm = LLM(    
+            #model="gemini/gemini-2.0-pro-exp-02-05",  
+            model="gemini/gemini-2.0-flash",     
+            api_key=os.environ.get("GEMINI_API_KEY"),
+            temperature=0.7,
+            # response_format=JavaSpringBoot        
+            )
+
+            # self.llm = LLM(
+            # model="openrouter/google/gemini-2.0-pro-exp-02-05:free",
+            # base_url="https://openrouter.ai/api/v1",
+            # api_key=os.environ.get("OPEN_ROUTE_SERVICE_API_KEY"),
+            # temperature=0.7,
+            # #response_format=JavaSpringBoot
+            # )
         except KeyError:
             raise EnvironmentError("GEMINI_API_KEY environment variable not set")
 
@@ -187,5 +194,6 @@ class TibcoToJavaCrew:
             process=Process.sequential,
             verbose=True,
             # planning=True
-            # memory=True 
+            # memory=True, 
+            # long_term_memory=self.long_term_memory
         )
